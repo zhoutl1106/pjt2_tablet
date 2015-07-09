@@ -213,7 +213,7 @@ void Dialog::writeUdpCmd(int index, QByteArray cmd)
 {
     QByteArray temp;
     temp.append(char(0x02));
-    temp.append(char(index));
+    temp.append(char(index+1));
     temp.append(cmd);
     cmdSocket->writeDatagram(temp,QHostAddress(g_widget->getTarget()),UDP_CMD_WRITE_PORT);
 }
