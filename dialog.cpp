@@ -13,6 +13,8 @@ extern DialogAutoCloseMessageBox *bkgMsgBoxF;
 extern bool valveStatus;
 extern bool vibratorStatus;
 extern Widget* g_widget;
+void g_setValve();
+void g_setVibrator();
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -237,7 +239,7 @@ bool Dialog::isAnotherCmd(QByteArray buf)
         return true;
     if(p[0] == char(0x04) && p[1] == char(0x03) && len >= 10)
         return true;
-    if(p[0]  == char(0x05) && len >= (unsigned char)p[3] + (unsigned char)p[4] * 256 + 5)
+    if(p[0]  == char(0x05) && len >= (unsigned char)p[3] + (unsigned char)p[4] * 256 + 7)
         return true;
     if(p[0]  == char(0x08) && len >= 3)
         return true;
@@ -253,7 +255,7 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
     {
         char* p = buf.data();
         //qDebug()<<int(p[0])<<int(p[1]);
-        qDebug()<<buf.toHex();
+        qDebug()<<"process cmd"<<buf.toHex();
         switch (p[0]) {
         case (char)0x01:
             g_widget->versions[id-1][0] = p[2];
@@ -287,9 +289,13 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
             temp = p[2];
             fileManager->mem = temp;
             temp = (unsigned char)p[3] + (unsigned char)p[4] * 256;
+            if(valveStatus != bool(p[5]))
+                g_setValve();
+            if(vibratorStatus != bool(p[6]))
+                g_setVibrator();
             qDebug()<<temp<<sizeof(fileManager->config);
-            memcpy(&(fileManager->config),p+5,temp);
-            buf.remove(0,temp+5);
+            memcpy(&(fileManager->config),p+7,temp);
+            buf.remove(0,temp+7);
             fileManager->configChange();
             setModeAndMem(fileManager->mode,fileManager->mem);
             qDebug()<<"got config, ash_delay = "<<fileManager->config.ash_delay;
@@ -315,6 +321,7 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
         default:
             break;
         }
+        qDebug()<<"after cmd"<<buf.toHex();
         //qDebug()<<answer.toHex()<<sender.toString();
     }
 }

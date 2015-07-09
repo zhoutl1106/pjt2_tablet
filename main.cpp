@@ -28,7 +28,7 @@ void Sleep(int ms)
     QTime time = QTime::currentTime().addMSecs(ms);
     while(QTime::currentTime() < time)
     {
-        QCoreApplication::processEvents(QEventLoop::AllEvents, 100);
+        QCoreApplication::processEvents(QEventLoop::ExcludeUserInputEvents, 100);
     }
 }
 
