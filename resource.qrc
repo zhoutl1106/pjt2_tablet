@@ -1,0 +1,37 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/back.png</file>
+        <file>image/backspace.png</file>
+        <file>image/bkg.png</file>
+        <file>image/btnG.png</file>
+        <file>image/btnR.png</file>
+        <file>image/circleR.png</file>
+        <file>image/circleW.png</file>
+        <file>image/downG.png</file>
+        <file>image/downR.png</file>
+        <file>image/lowerBkg.png</file>
+        <file>image/numBkg.png</file>
+        <file>image/numOK.png</file>
+        <file>image/ok.png</file>
+        <file>image/shutdownBkg.png</file>
+        <file>image/slider.png</file>
+        <file>image/tipsBkg.png</file>
+        <file>image/title.png</file>
+        <file>image/upG.png</file>
+        <file>image/upR.png</file>
+        <file>image/welcome.png</file>
+        <file>qss.qss</file>
+        <file>image/shutdownG.png</file>
+        <file>image/shutdownR.png</file>
+        <file>image/downArrow.png</file>
+        <file>image/upArrow.png</file>
+        <file>image/licenseBkg.png</file>
+        <file>image/radio_check.png</file>
+        <file>image/btnB.png</file>
+        <file>image/combo.png</file>
+        <file>image/circleG.png</file>
+        <file>image/timebkg.png</file>
+        <file>image/scrollBkg.png</file>
+        <file>image/scrollHandle.png</file>
+    </qresource>
+</RCC>

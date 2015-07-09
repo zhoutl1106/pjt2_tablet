@@ -1,0 +1,145 @@
+QDialog#Dialog{border-image: url(:/image/bkg.png);}
+
+QWidget
+{
+    font-size:30px;
+}
+
+QRadioButton
+{
+    text-align:center;
+    font-size:25px;
+}
+
+QRadioButton::indicator:checked
+{
+    border-image: url(:/image/radio_check.png);
+}
+
+QRadioButton::indicator:unchecked
+{
+    border-image: url(:/image/circleW.png);
+}
+
+QLCDNumber
+{
+    border-image: url(:/image/numBkg.png);
+    color: rgb(255, 255, 255);
+}
+
+QComboBox
+{
+    border-image: url(:/icons/07.png);
+    color: rgb(255, 255, 255);
+}
+
+QToolButton
+{
+    font-size:30px;
+    border-image: url(:/image/btnG.png);
+    color: rgb(255, 255, 255);
+}
+
+QToolButton:pressed
+{
+    border-image: url(:/image/btnR.png);
+}
+
+QPushButton
+{
+    border-image: url(:/image/btnG.png);
+    color: rgb(255, 255, 255);
+}
+
+QPushButton:pressed
+{
+    border-image: url(:/image/btnR.png);
+}
+
+
+QCheckBox::indicator:checked{
+width:30px;
+height:30px;
+image:url(":/icons/checked.png");
+}
+
+QCheckBox::indicator:unchecked{
+width:30px;
+height:30px;
+image:url(":/icons/unchecked.png");
+}
+
+QSpinBox
+{
+        text-align:center;
+        color:rgb(255,255,255);
+        border-image: url(:/image/btnR.png) no-repeat;
+}
+
+QSpinBox::up-button
+{
+        subcontrol-position:right;
+        width:50px;
+        height:50px;
+        image: url(:/image/upArrow.png);
+}
+
+QSpinBox::down-button
+{
+        subcontrol-position:left;
+        width:50px;
+        height:50px;
+        image: url(:/image/downArrow.png);
+}
+
+
+QDoubleSpinBox
+{
+        text-align:center;
+        color:rgb(255,255,255);
+        border-image: url(:/image/btnR.png) no-repeat;
+}
+
+QDoubleSpinBox::up-button
+{
+        subcontrol-position:right;
+        width:50px;
+        height:50px;
+        image: url(:/image/upArrow.png);
+}
+
+QDoubleSpinBox::down-button
+{
+        subcontrol-position:left;
+        width:50px;
+        height:50px;
+        image: url(:/image/downArrow.png);
+}
+
+QScrollBar:horizontal
+{
+        border:0.5px solid #dadbde;
+        background-color:#c6e2ff;
+        width:20px;
+}
+
+QScrollBar::handle:horizontal {
+     background: white;
+     min-width: 80px;
+     background-image: url(:/icons/01.png);
+}
+
+QSlider::groove {
+     /*border: 1px solid #999999;
+     height: 330px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+        width:15px;
+     background: qlineargradient(x1:0, y1:0, x2:0, y2:1, stop:0 #B1B1B1, stop:1 #c4c4c4);
+     margin: 5px 0;
+ }
+
+QSlider::handle {
+        border-image: url(:/image/slider.png);
+     width: 25px;
+     margin: -15px -25px; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+     border-radius: 3px;
+ }
