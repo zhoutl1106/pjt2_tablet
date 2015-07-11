@@ -59,7 +59,7 @@ FormVibrationAdjust::FormVibrationAdjust(QWidget *parent) :
 
     for(int i = 0;i<14;i++)
     {
-        btn[i] = new LongClickToolButton(NULL,i/2,i%2==0?1:-1);
+        btn[i] = new LongClickToolButton(NULL,i/2,i%2==0?1:-1,LongClickToolButton::vertical);
         connect(btn[i],SIGNAL(longClick(int,int)),this,SLOT(lbtnValue(int,int)));
         connect(btn[i],SIGNAL(released(int,int)),this,SLOT(lbtnRelease(int,int)));
         QVBoxLayout *layout = new QVBoxLayout;
@@ -168,6 +168,7 @@ void FormVibrationAdjust::updateData()
 void FormVibrationAdjust::on_toolButton_clicked()
 {
     if(isBeep)beep(50000,70);
+    g_dialog->fileManager->writeConfig(g_dialog->fileManager->mode,g_dialog->fileManager->mem);
     emit switchToPage(0);
 }
 

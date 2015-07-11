@@ -111,14 +111,7 @@ void FormMain::onLongPressTimer()
         DialogAutoCloseMessageBox box(NULL,"保存","是否保存模式参数","是","否",10,true);
         if(box.exec() == QDialog::Accepted)
         {
-            QByteArray cmd;
-            cmd.append(char(0x06));
-            cmd.append(char(g_dialog->fileManager->mode));
-            cmd.append(char(g_dialog->fileManager->mem));
-            cmd.append(char(sizeof(g_dialog->fileManager->config)&0xff));
-            cmd.append(char((sizeof(g_dialog->fileManager->config)>>8)&0xff));
-            cmd.append(QByteArray((char*)(&g_dialog->fileManager->config),sizeof(g_dialog->fileManager->config)));
-            g_dialog->cmdSocket->writeDatagram(cmd,QHostAddress(g_widget->getTarget()),UDP_CMD_WRITE_PORT);
+           g_dialog->fileManager->writeConfig(g_dialog->fileManager->mode,g_dialog->fileManager->mem);
         }
         Sleep(1000);
         QByteArray cmd;
@@ -149,12 +142,6 @@ void FormMain::on_toolButton_8_clicked()
 {
     //if(isBeep)beep(50000,27);
     emit switchToPage(3);
-}
-
-void FormMain::on_toolButton_3_clicked()
-{
-    //if(isBeep)beep(50000,28);
-    emit switchToPage(6);
 }
 
 void FormMain::on_toolButtonValve_clicked()

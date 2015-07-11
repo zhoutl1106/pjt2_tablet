@@ -114,3 +114,56 @@ void Widget::on_pushButton_sync_clicked()
     cmd.append(char(0x00));
     g_dialog->cmdSocket->writeDatagram(cmd,QHostAddress(getTarget()),UDP_CMD_WRITE_PORT);
 }
+
+void Widget::on_radioButton_1_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_2_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_3_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_4_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_5_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_6_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_7_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_8_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_9_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_10_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_11_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_12_clicked()
+{
+    g_dialog->setToPageAll(false);
+}
+void Widget::on_radioButton_All_clicked()
+{
+    g_dialog->setToPageAll(true);
+}

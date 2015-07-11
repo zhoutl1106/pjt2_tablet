@@ -26,6 +26,20 @@ private slots:
 
     void on_pushButton_sync_clicked();
 
+    void on_radioButton_1_clicked();
+    void on_radioButton_2_clicked();
+    void on_radioButton_3_clicked();
+    void on_radioButton_4_clicked();
+    void on_radioButton_5_clicked();
+    void on_radioButton_6_clicked();
+    void on_radioButton_7_clicked();
+    void on_radioButton_8_clicked();
+    void on_radioButton_9_clicked();
+    void on_radioButton_10_clicked();
+    void on_radioButton_11_clicked();
+    void on_radioButton_12_clicked();
+    void on_radioButton_All_clicked();
+
 private:
     Ui::Widget *ui;
     QList<QRadioButton *> list;

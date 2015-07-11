@@ -4,6 +4,7 @@
 #include <QDate>
 #include <QMessageBox>
 #include "dialog.h"
+#include "widget.h"
 #include <QCoreApplication>
 #include <QEvent>
 
@@ -12,6 +13,7 @@ extern void Sleep(int);
 extern DialogAutoCloseMessageBox *bkgMsgBoxF;
 extern DialogAutoCloseMessageBox *bkgMsgBoxE;
 extern bool isBeep;
+extern Widget* g_widget;
 
 bool isUnstandardAshNeed = true;
 
@@ -69,7 +71,7 @@ void FileManager::writeLastConfig()
 
 void FileManager::writeConfig(int mode1, int index)
 {
-//    qDebug()<<"writeConfig "<<mode1<<index;
+    qDebug()<<"writeConfig "<<mode1<<index;
 //    int i = mode1;
 //    QFile lastIndexFile(LAST_INDEX_FILENAME);
 //    lastIndexFile.open(QFile::WriteOnly);
@@ -77,61 +79,39 @@ void FileManager::writeConfig(int mode1, int index)
 //    i = index;
 //    lastIndexFile.write((char*)&i,4);
 //    lastIndexFile.close();
-//    mode = mode1;
-//    mem = index;
-//    m_lastMode = mode;
-//    m_lastIndex = index;
+    mode = mode1;
+    mem = index;
+    m_lastMode = mode;
+    m_lastIndex = index;
 //    qDebug()<<"write last config "<<mode<<index<<", ash delay "<<config.ash_delay;
 //    QFile configFile(CONFIG_FILENAME_HEAD+QString::number(mode) + QString::number(index));
 //    configFile.open(QFile::WriteOnly);
 //    configFile.write((char*)&config,sizeof(config_t));
 //    configFile.close();
-//    g_dialog->setModeAndMem(mode, mem);
+    g_dialog->setModeAndMem(mode, mem);
+    QByteArray cmd;
+    cmd.append(char(0x06));
+    cmd.append(char(g_dialog->fileManager->mode));
+    cmd.append(char(g_dialog->fileManager->mem));
+    cmd.append(char(sizeof(g_dialog->fileManager->config)&0xff));
+    cmd.append(char((sizeof(g_dialog->fileManager->config)>>8)&0xff));
+    cmd.append(QByteArray((char*)(&g_dialog->fileManager->config),sizeof(g_dialog->fileManager->config)));
+    g_dialog->cmdSocket->writeDatagram(cmd,QHostAddress(g_widget->getTarget()),UDP_CMD_WRITE_PORT);
+    qDebug()<<cmd.toHex();
 }
 
 int FileManager::readConfig(int mode1, int index)
 {
-//    int ret;
-//    int i = mode1;
-//    mode = mode1;
-//    mem = index;
-//    QFile lastIndexFile(LAST_INDEX_FILENAME);
-//    lastIndexFile.open(QFile::WriteOnly);
-//    lastIndexFile.write((char*)&i,4);
-//    i = index;
-//    lastIndexFile.write((char*)&i,4);
-//    lastIndexFile.close();
-//    qDebug()<<"write last config "<<mode<<index;
-//    QFile configFile(CONFIG_FILENAME_HEAD+QString::number(mode) + QString::number(index));
-//    if(configFile.exists())
-//    {
-//        configFile.open(QFile::ReadOnly);
-//        configFile.read((char*)&config,sizeof(config_t));
-//        configFile.close();
-//        dlg->show();
-//        dlg->setText("正在设置灯光");
-//        setLights();
-//        Sleep(2000);
-//        ret = sendCmds();
-//        if(ret < 0)
-//            return -1;
-//        emit sigConfigChanged();
-//    }
-//    else
-//    {
-//        qDebug()<<"no such config";
-//        return 0;
-//        memset(&config,0,sizeof(config_t));
-//    }
-
-//    qDebug()<<"read config, mode:" << mode << mem;
-//    g_dialog->setModeAndMem(mode, mem);
-
-//    if(isUnstandardAshNeed)
-//    {
-//        isUnstandardAshNeed = false;
-//        unstandardAsh();
-//    }
+    mode = mode1;
+    mem = index;
+    m_lastMode = mode;
+    m_lastIndex = index;
+    QByteArray cmd;
+    cmd.append(char(0x0c));
+    cmd.append(char(g_dialog->fileManager->mode));
+    cmd.append(char(g_dialog->fileManager->mem));
+    g_dialog->cmdSocket->writeDatagram(cmd,QHostAddress(g_widget->getTarget()),UDP_CMD_WRITE_PORT);
+    qDebug()<<cmd.toHex();
     return 0;
 }
 

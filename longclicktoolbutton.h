@@ -12,7 +12,8 @@ class LongClickToolButton : public QToolButton
     Q_OBJECT
 
 public:
-    LongClickToolButton(QWidget* parent, int index, int delta);
+    enum direction{horizontal, vertical};
+    LongClickToolButton(QWidget* parent, int index, int delta, direction v);
     ~LongClickToolButton();
     void paintEvent(QPaintEvent *);
 

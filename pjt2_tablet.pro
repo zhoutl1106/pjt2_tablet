@@ -21,7 +21,11 @@ SOURCES += main.cpp\
     dialog.cpp \
     filemanager.cpp \
     forms/formvibrationadjust.cpp \
-    longclicktoolbutton.cpp
+    longclicktoolbutton.cpp \
+    forms/formmodeselect.cpp \
+    forms/formaccuracyadjust.cpp \
+    multistatustoolbutton.cpp \
+    forms/formall.cpp
 
 HEADERS  += widget.h \
     dialogautoclosemessagebox.h \
@@ -29,13 +33,20 @@ HEADERS  += widget.h \
     dialog.h \
     filemanager.h \
     forms/formvibrationadjust.h \
-    longclicktoolbutton.h
+    longclicktoolbutton.h \
+    forms/formmodeselect.h \
+    forms/formaccuracyadjust.h \
+    multistatustoolbutton.h \
+    forms/formall.h
 
 FORMS    += widget.ui \
     dialogautoclosemessagebox.ui \
     forms/formmain.ui \
     dialog.ui \
-    forms/formvibrationadjust.ui
+    forms/formvibrationadjust.ui \
+    forms/formmodeselect.ui \
+    forms/formaccuracyadjust.ui \
+    forms/formall.ui
 
 CONFIG += mobility
 MOBILITY = 

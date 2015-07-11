@@ -40,8 +40,8 @@ Dialog::Dialog(QWidget *parent) :
 //    form1_account = new FormLicense;
     form2_main = new FormMain;
     form3_vibrationAdjust = new FormVibrationAdjust;
-//    form4_mode = new FormModeSelect;
-//    form5_accuracy = new FormAccuracyAdjust;
+    form4_mode = new FormModeSelect;
+    form5_accuracy = new FormAccuracyAdjust;
 //    form6_system = new FormSystem;
 //    form7_shutdown = new FormShutdown;
 //    form8_admin = new FormAdmin;
@@ -51,13 +51,14 @@ Dialog::Dialog(QWidget *parent) :
 //    form12_accuracyDetail = new FormAccuracyDetailAdjust;
 //    form13_whole = new FormWholeSetting;
 //    form14_monitor = new FormCntCheck;
+    form15_all = new FormAll;
 
 //    connect(form0_welcome,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 //    connect(form1_account,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
     connect(form2_main,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
     connect(form3_vibrationAdjust,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
-//    connect(form4_mode,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
-//    connect(form5_accuracy,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
+    connect(form4_mode,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
+    connect(form5_accuracy,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 //    connect(form6_system,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 //    connect(form7_shutdown,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 //    connect(form8_admin,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
@@ -69,8 +70,8 @@ Dialog::Dialog(QWidget *parent) :
 //    connect(form14_monitor,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 //    connect(fileManager,SIGNAL(switchToPage(int)),ui->stackedWidget,SLOT(setCurrentIndex(int)));
 
-//    connect(fileManager,SIGNAL(sigConfigChanged()),form3_vibrationAdjust,SLOT(updateData()));
-//    connect(fileManager,SIGNAL(sigConfigChanged()),form4_mode,SLOT(updateData()));
+    connect(fileManager,SIGNAL(sigConfigChanged()),form3_vibrationAdjust,SLOT(updateData()));
+    connect(fileManager,SIGNAL(sigConfigChanged()),form4_mode,SLOT(updateData()));
 //    connect(fileManager,SIGNAL(sigConfigChanged()),form9_ash,SLOT(updateData()));
 //    connect(fileManager,SIGNAL(sigConfigChanged()),form10_bkg,SLOT(updateData()));
 //    connect(fileManager,SIGNAL(sigConfigChanged()),form11_valve,SLOT(updateData()));
@@ -82,6 +83,7 @@ Dialog::Dialog(QWidget *parent) :
 //    connect(serialManager,SIGNAL(cntUpload(int,int,int)),form14_monitor,SLOT(cntUpload(int,int,int)));
 //    connect(serialManager,SIGNAL(resetSuccess()),form14_monitor,SLOT(resetSuccess()));
 
+    ui->stackedWidget->insertWidget(0,form15_all);
 //    ui->stackedWidget->insertWidget(0,form14_monitor);
 //    ui->stackedWidget->insertWidget(0,form13_whole);
 //    ui->stackedWidget->insertWidget(0,form12_accuracyDetail);
@@ -91,8 +93,8 @@ Dialog::Dialog(QWidget *parent) :
 //    ui->stackedWidget->insertWidget(0,form8_admin);
 //    ui->stackedWidget->insertWidget(0,form7_shutdown);
 //    ui->stackedWidget->insertWidget(0,form6_system);
-//    ui->stackedWidget->insertWidget(0,form5_accuracy);
-//    ui->stackedWidget->insertWidget(0,form4_mode);
+    ui->stackedWidget->insertWidget(0,form5_accuracy);
+    ui->stackedWidget->insertWidget(0,form4_mode);
     ui->stackedWidget->insertWidget(0,form3_vibrationAdjust);
     ui->stackedWidget->insertWidget(0,form2_main);
 //    ui->stackedWidget->insertWidget(0,form1_account);
@@ -104,6 +106,11 @@ Dialog::Dialog(QWidget *parent) :
 Dialog::~Dialog()
 {
     delete ui;
+}
+
+void Dialog::setToPageAll(bool v)
+{
+    ui->stackedWidget->setCurrentIndex(v?4:0);
 }
 
 void Dialog::setModeAndMem(int mode, int mem)
@@ -243,6 +250,8 @@ bool Dialog::isAnotherCmd(QByteArray buf)
         return true;
     if(p[0]  == char(0x08) && len >= 3)
         return true;
+    if(p[0]  == char(0x0c) && len >= 2)
+        return true;
     //qDebug()<<"no more cmd";
     return false;
 }
@@ -318,6 +327,12 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
 //            cmdSocket->writeDatagram(answer,sender,UDP_CMD_WRITE_PORT);
 //            buf.remove(0,2);
 //            break;
+        case char(0x0c):
+        {
+            DialogAutoCloseMessageBox box(NULL,"警告","读取配置错误，请检查色选机","确定","",0,false);
+            box.exec();
+        }
+            break;
         default:
             break;
         }

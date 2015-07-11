@@ -1,14 +1,25 @@
 #include "longclicktoolbutton.h"
 #include <QDebug>
 
-LongClickToolButton::LongClickToolButton(QWidget *parent, int index, int delta):QToolButton(parent)
+LongClickToolButton::LongClickToolButton(QWidget *parent, int index, int delta, direction v):QToolButton(parent)
 {
     m_index = index;
     m_delta = delta;
-    if(delta > 0)
-        setStyleSheet("QToolButton {border-image : url(:/image/upG.png);} QToolButton::pressed {border-image : url(:/image/upR.png);}");
+    if(v == vertical)
+    {
+        if(delta > 0)
+            setStyleSheet("QToolButton {border-image : url(:/image/upG.png);} QToolButton::pressed {border-image : url(:/image/upR.png);}");
+        else
+            setStyleSheet("QToolButton {border-image : url(:/image/downG.png);} QToolButton::pressed {border-image : url(:/image/downR.png);}");
+    }
     else
-        setStyleSheet("QToolButton {border-image : url(:/image/downG.png);} QToolButton::pressed {border-image : url(:/image/downR.png);}");
+    {
+        if(delta > 0)
+            setStyleSheet("QToolButton {border-image : url(:/image/rightG.png);} QToolButton::pressed {border-image : url(:/image/rightR.png);}");
+        else
+            setStyleSheet("QToolButton {border-image : url(:/image/leftG.png);} QToolButton::pressed {border-image : url(:/image/leftR.png);}");
+
+    }
     connect(this,SIGNAL(clicked()),this,SLOT(onclick()));
     connect(this,SIGNAL(pressed()),this,SLOT(pressed()));
     connect(this,SIGNAL(released()),this,SLOT(released()));

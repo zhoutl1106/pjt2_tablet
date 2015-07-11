@@ -33,5 +33,10 @@
         <file>image/timebkg.png</file>
         <file>image/scrollBkg.png</file>
         <file>image/scrollHandle.png</file>
+        <file>image/leftG.png</file>
+        <file>image/leftR.png</file>
+        <file>image/rightG.png</file>
+        <file>image/rightR.png</file>
+        <file>image/sliderH.png</file>
     </qresource>
 </RCC>

@@ -22,8 +22,8 @@
 //#include "forms/formlicense.h"
 #include "forms/formmain.h"
 #include "forms/formvibrationadjust.h"
-//#include "forms/formmodeselect.h"
-//#include "forms/formaccuracyadjust.h"
+#include "forms/formmodeselect.h"
+#include "forms/formaccuracyadjust.h"
 //#include "forms/formsystem.h"
 //#include "forms/formshutdown.h"
 //#include "forms/formadmin.h"
@@ -33,6 +33,7 @@
 //#include "forms/formaccuracydetailadjust.h"
 //#include "forms/formwholesetting.h"
 //#include "forms/formcntcheck.h"
+#include "forms/formall.h"
 
 namespace Ui {
 class Dialog;
@@ -50,14 +51,15 @@ public:
     void setModeAndMem(int mode, int mem);
     QUdpSocket *cmdSocket;
     void writeUdpCmd(int index, QByteArray cmd);
+    void setToPageAll(bool);
 
 
 //    FormWelcome                 *form0_welcome;
 //    FormLicense                 *form1_account;
     FormMain                    *form2_main;
     FormVibrationAdjust         *form3_vibrationAdjust;
-//    FormModeSelect              *form4_mode;
-//    FormAccuracyAdjust          *form5_accuracy;
+    FormModeSelect              *form4_mode;
+    FormAccuracyAdjust          *form5_accuracy;
 //    FormSystem                  *form6_system;
 //    FormShutdown                *form7_shutdown;
 //    FormAdmin                   *form8_admin;
@@ -67,6 +69,7 @@ public:
 //    FormAccuracyDetailAdjust    *form12_accuracyDetail;
 //    FormWholeSetting            *form13_whole;
 //    FormCntCheck                *form14_monitor;
+    FormAll                     *form15_all;
 
 private slots:
     void onUpdateUdpRead();
