@@ -108,7 +108,7 @@ void FormModeSelect::on_toolButton_2_clicked()
     {
         qDebug()<<"ready to save"<<mode<<mem;
         g_dialog->fileManager->writeConfig(mode,mem);
-        //g_dialog->fileManager->configChange();
+        g_dialog->fileManager->configChange();
     }
 }
 

@@ -42,6 +42,34 @@ FormAll::~FormAll()
     delete ui;
 }
 
+void FormAll::setValve(bool value)
+{
+    if(value)
+    {
+        ui->toolButtonValve->setStyleSheet("border-image: url(:/image/btnR.png); color: rgb(255, 255, 255);");
+        ui->toolButtonValve->setText("喷阀 开");
+    }
+    else
+    {
+        ui->toolButtonValve->setStyleSheet("border-image: url(:/image/btnG.png); color: rgb(255, 255, 255);");
+        ui->toolButtonValve->setText("喷阀 关");
+    }
+}
+
+void FormAll::setVibrator(bool value)
+{
+    if(value)
+    {
+        ui->toolButtonVibrator->setStyleSheet("border-image: url(:/image/btnR.png); color: rgb(255, 255, 255);");
+        ui->toolButtonVibrator->setText("供料 开");
+    }
+    else
+    {
+        ui->toolButtonVibrator->setStyleSheet("border-image: url(:/image/btnG.png); color: rgb(255, 255, 255);");
+        ui->toolButtonVibrator->setText("供料 关");
+    }
+}
+
 void FormAll::lbtnValue(int index, int value)
 {
     ui->horizontalSlider->setValue(ui->horizontalSlider->value()+value);

@@ -234,7 +234,7 @@ bool Dialog::isAnotherCmd(QByteArray buf)
 
     if(p[0] == char(0x05))
     {
-        qDebug()<< (unsigned char)p[3] <<  (unsigned char)p[4] << len;
+        //qDebug()<< (unsigned char)p[3] <<  (unsigned char)p[4] << len;
     }
 
 
@@ -272,26 +272,20 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
             g_widget->updateDisplay();
             buf.remove(0,4);
             break;
-//        case (char)0x02:
-//            if(p[1] == char(0x01))
-//            {
-//                qDebug()<<"udp got 232 cmd";
-//                serialManager->writeCmd(0,buf.mid(3,3));
-//                buf.remove(0,8);
-//            }
-//            if(p[1] == char(0x02))
-//            {
-//                qDebug()<<"udp got 1#485 cmd";
-//                serialManager->writeCmd(1,buf.mid(3,6));
-//                buf.remove(0,9);
-//            }
-//            if(p[1] == char(0x03))
-//            {
-//                qDebug()<<"udp got 2#485 cmd";
-//                serialManager->writeCmd(2,buf.mid(3,6));
-//                buf.remove(0,10);
-//            }
-//            break;
+        case (char)0x04:
+            if(p[1] == char(0x01))
+            {
+                qDebug()<<"udp got 232 cmd";
+                //serialManager->writeCmd(0,buf.mid(3,3));
+                buf.remove(0,8);
+            }
+            if(p[1] == char(0x03))
+            {
+                qDebug()<<"udp got 2#485 cmd";
+                //serialManager->writeCmd(2,buf.mid(3,6));
+                buf.remove(0,10);
+            }
+            break;
         case (char)0x05:
             temp = p[1];
             fileManager->mode = temp;
@@ -307,7 +301,9 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
             buf.remove(0,temp+7);
             fileManager->configChange();
             setModeAndMem(fileManager->mode,fileManager->mem);
-            qDebug()<<"got config, ash_delay = "<<fileManager->config.ash_delay;
+            for(int i = 0;i<14;i++)
+                qDebug()<<"times"<<i<<fileManager->config.times[i];
+            //qDebug()<<"got config, ash_delay = "<<fileManager->config.ash_delay;
             break;
 //        case (char)0x06:
 //            memcpy(&(fileManager->config),p+5,(unsigned char)p[3] + (unsigned char)p[4] * 256);
@@ -336,7 +332,7 @@ void Dialog::processUdpCmd(QByteArray& buf, QHostAddress sender)
         default:
             break;
         }
-        qDebug()<<"after cmd"<<buf.toHex();
+        //qDebug()<<"after cmd"<<buf.toHex();
         //qDebug()<<answer.toHex()<<sender.toString();
     }
 }

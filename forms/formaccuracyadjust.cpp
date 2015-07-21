@@ -154,13 +154,13 @@ void FormAccuracyAdjust::on_toolButton_2_clicked()
     ui->verticalSlider32->setValue(0);
     ui->verticalSlider33->setValue(0);
     g_dialog->fileManager->configChange();
-    /*for(int i = 0;i<14;i++)
+    for(int i = 0;i<14;i++)
     {
         qDebug()<<i<<g_dialog->fileManager->config.times[i]
                   <<g_dialog->fileManager->config.accuracy[i][0]
                  <<g_dialog->fileManager->config.accuracy[i][1]
                 <<g_dialog->fileManager->config.accuracy[i][2];
-    }*/
+    }
     char tmp[6] = {0x02,0};
     QByteArray temp = QByteArray(tmp,6);
     char *p = temp.data();

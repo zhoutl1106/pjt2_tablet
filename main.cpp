@@ -37,6 +37,7 @@ void g_setValve()
     valveStatus = !valveStatus;
     g_dialog->form2_main->setValve(valveStatus);
     g_dialog->form3_vibrationAdjust->setValve(valveStatus);
+    g_dialog->form15_all->setValve(valveStatus);
     char tmp[2] = {0x09,0x00};
     tmp[1] = valveStatus;
     QByteArray tmp1(tmp,2);
@@ -48,6 +49,7 @@ void g_setVibrator()
     vibratorStatus = !vibratorStatus;
     g_dialog->form2_main->setVibrator(vibratorStatus);
     g_dialog->form3_vibrationAdjust->setVibrator(vibratorStatus);
+    g_dialog->form15_all->setVibrator(vibratorStatus);
     char tmp[2] = {0x0a,0x00};
     tmp[1] = vibratorStatus;
     QByteArray tmp1(tmp,2);
@@ -70,7 +72,7 @@ int main(int argc, char *argv[])
     Widget w;
     g_widget = &w;
     w.setStyleSheet(stylesheet);
-    w.show();
+    w.showFullScreen();
 
     return a.exec();
 }

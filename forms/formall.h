@@ -16,6 +16,8 @@ class FormAll : public QWidget
 public:
     explicit FormAll(QWidget *parent = 0);
     ~FormAll();
+    void setValve(bool value);
+    void setVibrator(bool value);
 
 private slots:
     void lbtnValue(int index, int value);

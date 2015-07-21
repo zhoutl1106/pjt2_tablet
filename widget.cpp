@@ -2,6 +2,7 @@
 #include "ui_widget.h"
 #include <QDate>
 #include <QTime>
+#include <QVBoxLayout>
 
 extern Dialog* g_dialog;
 
@@ -56,7 +57,7 @@ void Widget::updateDisplay()
     ui->radioButton_All->setChecked(true);
     for(int i = 0;i<12;i++)
     {
-        qDebug()<<i<<versions[i][0]<<versions[i][1];
+        //qDebug()<<i<<versions[i][0]<<versions[i][1];
         if(versions[i][0] == 0 && versions[i][1] == 0)
         {
             list.at(i)->setText("色选机" + QString::number(i+1)
